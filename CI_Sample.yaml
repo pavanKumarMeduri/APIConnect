@@ -1,0 +1,45 @@
+swagger: '2.0'
+info:
+  x-ibm-name: cisample
+  version: 1.0.0
+  title: CI_Sample
+schemes:
+  - https
+host: $(catalog.host)
+basePath: /api
+consumes:
+  - application/xml
+  - application/json
+produces:
+  - application/xml
+  - application/json
+securityDefinitions: {}
+x-ibm-configuration:
+  testable: true
+  enforced: true
+  cors:
+    enabled: true
+  catalogs:
+    apic-dev:
+      properties:
+        runtime-url: $(TARGET_URL)
+    sb:
+      properties:
+        runtime-url: 'http://localhost:4001'
+  assembly:
+    execute:
+      - invoke:
+          target-url: 'http://www.webservicex.com/globalweather.asmx'
+  gateway: datapower-gateway
+paths:
+  /GetCitiesByCountry:
+    get:
+      responses:
+        '200':
+          description: 200 OK
+  /GetWeather:
+    get:
+      responses:
+        '200':
+          description: 200 OK
+definitions: {}
